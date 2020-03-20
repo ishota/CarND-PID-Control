@@ -34,8 +34,8 @@ int main() {
   uWS::Hub h;
 
   PID pid;
-  // pid.Init(0.0385, 0.00025, 0.236, 0.585);
-  pid.Init(0.0384, 0.00025, 0.236, 0.585);
+  pid.Init(0.0745, 0.00000000001, 1.39, 0.18);
+  // pid.Init(0.0745, 0.000001, 1.39, 0.18);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
@@ -55,7 +55,7 @@ int main() {
           double cte = std::stod(j[1]["cte"].get<string>());
           double speed = std::stod(j[1]["speed"].get<string>());
           double angle = std::stod(j[1]["steering_angle"].get<string>());
-          double throttle_value = 0.25;
+          double throttle_value = 0.6;
 
           std::cout << speed << std::endl;
           std::cout << angle << std::endl;

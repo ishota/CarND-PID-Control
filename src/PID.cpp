@@ -18,7 +18,6 @@ void PID::Init(double Kp_, double Ki_, double Kd_, double discount_rate_) {
   i_error = 0;
   pre_cte = 0;
   predict_totalError = 0;
-  prev_totalError = 0;
 }
 
 void PID::UpdateError(double cte) {
@@ -35,8 +34,5 @@ void PID::UpdateError(double cte) {
 }
 
 double PID::TotalError() {
-  // return -Kp*p_error - Kd*d_error - Ki*i_error;
-  double returned_totalError = predict_totalError * discount_rate - Kp*p_error - Kd*d_error - Ki*i_error + prev_totalError*0.2;
-  prev_totalError = returned_totalError;
-  return returned_totalError;
+  return predict_totalError * discount_rate - (Kp*p_error + Kd*d_error + Ki*i_error) * (1.0 - discount_rate);
 }
