@@ -45,6 +45,11 @@ class PID {
   double Kp;
   double Ki;
   double Kd;
+
+  /**
+   * predicted cte discount rate
+   */
+  double discount_rate;
 };
 
 #endif  // PID_H
