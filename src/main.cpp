@@ -103,14 +103,15 @@ int main() {
           double steer_value = pid.TotalError();
           goodness = cum_cte / sim_time;
 
-          //TWIGLE
+          //TWIDDLE
           if ( (fabs(cte) > bad_cte || sim_time > good_time ) && escape_sw == 0) {
             twigle_iteration++;
             escape_sw = 1;
 
-            // sim_time は基準を超えた
+            // sim_time is over good_time
             if ( sim_time > good_time ) {
 
+              // best_goodness
               if ( goodness < best_goodness ){
                 printf(" godness %f < best_goodness %f", goodness, best_goodness);
                 best_goodness = goodness;
@@ -120,6 +121,7 @@ int main() {
                 best_ki = ki;
                 best_kd = kd;
               } else {
+              // not best
                 printf(" godness %f >= best_goodness %f", goodness, best_goodness);
                 pre_goodness = best_goodness;
                 pre_sim_time = best_sim_time;
@@ -128,6 +130,7 @@ int main() {
                 kd = best_kd;
               }
 
+            // sim_time is lower than best time
             } else if ( sim_time > best_sim_time ) {
               printf(" sim_time %d > best_sim_time %d", sim_time, best_sim_time);
               best_sim_time = sim_time;
@@ -138,6 +141,7 @@ int main() {
               best_ki = ki;
               best_kd = kd;
             } else if ( pre_sim_time > sim_time ){
+            // sim_time is lower than previous sim_time
               printf(" pre_sim_time %d > sim_time %d", pre_sim_time, sim_time);
               twigle_sub_count++;
               kp = pre_kp;
