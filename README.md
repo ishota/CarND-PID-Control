@@ -49,7 +49,8 @@ double kd = 0.507;    //d gain
 [demo]: https://user-images.githubusercontent.com/13342802/77847282-03a18800-71f7-11ea-8153-ac0408317db9.gif
 
 Result video is here.
-|[result gif][demo]
+
+![result gif][demo]
 
 ## Control setting
 
@@ -67,7 +68,6 @@ if ( steer < -1 ) {
   steer = -0.99;
 }
 ```
-
 
 ## Parameter serach
 
